@@ -14,7 +14,7 @@ app.get('/', function(req, res) {
 
   res.render('index', {
    
-    myTypeClient: myTypeServer 
+    myClientType: myTypeServer 
 
   });
   
