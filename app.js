@@ -1,15 +1,33 @@
 const express = require('express')
 const app = express()
 const port = process.env.PORT || 5500;
+// set the view engine to ejs
+let path = require('path');
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
-app.get('/', function (req, res) {
-  res.send('<h1>I am an Enneagram Type 6: The Loyalist</h1> <p>The pros to working with a type 6 is that they are devoted to the project</p><p>The cons of working with a type 6 is that they are risk averse which can stunt a project. </p>')
+// use res.render to load up an ejs view file
+
+let myTypeServer = "6: The Loyalist";
+
+app.get('/', function(req, res) {
+
+  res.render('index', {
+   
+    myClientType: myTypeServer 
+
+  });
+  
+});
+
+
+app.get('/send', function (req, res) {
+  
+    res.send('Hello World from Express <br><a href="/">home</a>')
 })
 
-
-
-
+// app.listen(3000)
 
 app.listen(port, () => {
-  console.log(`Mike app listening on port ${port}`)
+  console.log(`nov app listening on port ${port}`)
 })
