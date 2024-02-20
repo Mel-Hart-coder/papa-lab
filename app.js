@@ -69,6 +69,8 @@ async function run() {
 app.get('/read', async(reg,res) => {
   
   let myResultServer = await run();
+
+  
   console.log(myResultServer[0].name);
 
 
