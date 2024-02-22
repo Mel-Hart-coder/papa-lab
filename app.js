@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 // use res.render to load up an ejs view file
 
-let myTypeServer = "9️⃣ The Peacemaker ✌🏻";
+let myTypeServer = "6: The Loyalist";
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(process.env.URI, {
@@ -29,9 +29,9 @@ async function run() {
     await client.connect();
     // Send a ping to confirm a successful connection
     // await client.db("admin").command({ ping: 1 });
-    const result = await client.db("papa-database").collection("papa-collection").find().toArray();
+    const result = await client.db("papa-lab").collection("projects").find().toArray();
 
-    //console.log("cxnDB result: ", result);
+    console.log("cxnDB result: ", result);
 
     return result; 
 
@@ -57,6 +57,7 @@ app.get('/read', async (req,res) => {
     myResultClient: myResultServer
 
   });
+  
 
 
 }); 
@@ -64,15 +65,21 @@ run().catch(console.dir);
 
 
 
-app.get('/', function(req, res) {
+app.get('/', (req,res) => {
+
+  console.log("in get to slash name:", req.query.ejsFormName); 
+  myTypeServer = req.query.ejsFormName; 
 
   res.render('index', {
-   
-    myTypeClient: myTypeServer 
+    myTypeClient: myTypeServer,
+    myResultClient: "myResultServer"
 
   });
+
   
-});
+})
+
+
 
 
 app.get('/send', function (req, res) {
